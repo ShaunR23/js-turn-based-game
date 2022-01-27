@@ -17,25 +17,55 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Turn Based Game!!</h1>
-
-    <div class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton1"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
+    <div class="nav-container">
+      <nav class="navbar">
+        <div class="nav-text">
+          <h1>Turn Based Game!!</h1>
+        </div>
+        <div class="nav-list">
+          <ul>
+            <li>Our Game</li>
+            <li>About Our Game</li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="main-container">
+      <div class="dropdown fighter-select">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Select Your Fighter!
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li>
+            <a class="dropdown-item fighter-1" id="fighter-1" href="#"
+              >Action</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item fighter-2" id="fighter-2" href="#"
+              >Another action</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item fighter-3" id="fighter-3" href="#"
+              >Something else here</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
 
     <script

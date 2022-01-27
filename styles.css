@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo:wght@700&display=swap");
+
+body {
+  margin: 0 0 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.nav-container {
+  display: fkex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  background-color: white;
+  border-bottom: 2px solid rgb(0, 9, 83);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .nav-text {
+  display: flex;
+  margin: 0 0 0 3rem;
+}
+
+.navbar .nav-text h1 {
+  text-transform: uppercase;
+  font-family: "Chivo", sans-serif;
+}
+
+.navbar .nav-list {
+  display: flex;
+  margin: 0 2rem 0 0;
+}
+
+.navbar .nav-list ul {
+  display: flex;
+  list-style: none;
+  margin: 1rem 0 1rem 0;
+}
+
+.navbar .nav-list ul li {
+  text-transform: uppercase;
+  font-family: "Chivo", sans-serif;
+  margin: 0 1rem 0 0;
+}
+
+.main-container {
+  display: flex;
+  background: rgb(242, 242, 242);
+  background: linear-gradient(
+    90deg,
+    rgba(242, 242, 242, 1) 0%,
+    rgba(221, 221, 221, 1) 24%,
+    rgba(205, 205, 205, 1) 100%
+  );
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ///////////////////MAIN CONTAINER */
+
+.fighter-select {
+  top: 3rem;
+}
