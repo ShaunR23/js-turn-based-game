@@ -18,34 +18,34 @@ const Game = class {
         
         switch (playerNum) {
             case 1:
-                this.player = new Player({name:`example`, hp: 21, dmg: 5});
+                this.player = new Player({name:`player1`, hp: 20, dmg: 5});
                 break;
             case 2:
-                this.player = new Player({name:`example`, hp:21, dmg:5});
+                this.player = new Player({name:`player2`, hp: 30, dmg: 2});
                 break;
             case 3:
-                this.player = new Player({name:`example`, hp:21, dmg:5});
+                this.player = new Player({name:`player3`, hp: 13, dmg: 8});
                 break;
         }
     }
 
     enemyCreate() {
 
+        const randomNumGen = () => {
+            
+        } 
+
         switch (enemyNum) {
             case 1:
-                this.enemy = new Enemy({name:`example`, hp:21, dmg: 5});
+                this.enemy = new Enemy({name:`enemy1`, hp: 21, dmg: 5});
                 break;
             case 2:
-                this.enemy = new Enemy({name: `example`, hp:21, dmg: 5});
+                this.enemy = new Enemy({name: `enemy2`, hp: 21, dmg: 5});
                 break;
             case 3:
-                this.enemy = new Enemy({name: `example`, hp:21, dmg: 5});
+                this.enemy = new Enemy({name: `enemy3`, hp: 21, dmg: 5});
                 break;
         }
-
-        //display hidden dropdown
-
-
     }
 }
 
