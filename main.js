@@ -128,7 +128,7 @@ const Game = class {
             statusText.textContent = `${this.enemy.name} has slain ${this.player.name}!`;
             setTimeout(function(){
                 reset();
-            }, 20000)
+            }, 12000)
         } 
 
         if(this.enemy.hp <= 0) {
@@ -136,7 +136,7 @@ const Game = class {
             statusText.textContent = `${this.player.name} has slain ${this.enemy.name}!`;
             setTimeout(function(){
                 reset();
-            }, 20000)
+            }, 12000)
         }
 
     }
@@ -192,6 +192,7 @@ const reset = () => {
         playerPercentHp = 0;
         endGameCounter = 0;
 
+        inGame.hidden = true;
         home.hidden = false;
 }
 
