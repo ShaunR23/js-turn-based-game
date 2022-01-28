@@ -5,12 +5,18 @@
 const fighter1 = document.querySelector(`.fighter-1`);
 const fighter2 = document.querySelector(`.fighter-2`);
 const fighter3 = document.querySelector(`.fighter-3`);
-const fight = document.querySelector ('.fight');
+let fight;
 let fightButton;
+let statusText;
 let playerNum = 0;
 let enemyNum = 0;
 let game;
 let buttonClick = 0;
+let enemyPercentHp = 0;
+let enemyHpBarCalc = 0;
+let playerHpBarCalc = 0;
+let playerPercentHp = 0;
+let endGameCounter = 0;
 
 const Game = class {
     constructor(player, enemy) {
@@ -24,13 +30,13 @@ const Game = class {
         
         switch (playerNum) {
             case 1:
-                this.player = new Player({name:`player1`, hp: 20, dmg: 5});
+                this.player = new Player({name:`Warrior`, hp: 20, dmg: 5});
                 break;
             case 2:
-                this.player = new Player({name:`player2`, hp: 30, dmg: 2});
+                this.player = new Player({name:`Bastion`, hp: 30, dmg: 2});
                 break;
             case 3:
-                this.player = new Player({name:`player3`, hp: 13, dmg: 8});
+                this.player = new Player({name:`Rogue`, hp: 13, dmg: 8});
                 break;
         }
     }
@@ -45,29 +51,89 @@ const Game = class {
 
         switch (enemyNum) {
             case 1:
-                this.enemy = new Enemy({name:`enemy1`, hp: 20, dmg: 5});
+                this.enemy = new Enemy({name:`Dark Knight`, hp: 20, dmg: 5});
                 break;
             case 2:
-                this.enemy = new Enemy({name: `enemy2`, hp: 30, dmg: 2});
+                this.enemy = new Enemy({name: `Glutton`, hp: 30, dmg: 2});
                 break;
             case 3:
-                this.enemy = new Enemy({name: `enemy3`, hp: 13, dmg: 8});
+                this.enemy = new Enemy({name: `Nightstalker`, hp: 13, dmg: 8});
                 break;
         }
     }
 
     playerAttack(){
-        this.enemy.hp = this.enemy.hp - this.player.dmg
-        console.log(this.enemy.hp)
-        return this.enemy.hp
+        this.enemy.hp = this.enemy.hp - this.player.dmg;
+        console.log(this.enemy.hp);
+        statusText.textContent = `${this.player.name} attacked, dealing ${this.player.dmg} dmg to ${this.enemy.name}!`;
+       
+        enemyPercentHp = (this.player.dmg / this.enemy.hp);
+
+        console.log(this.enemy.hp);
+        enemyHpBar.textContent = `${this.enemy.hp}`;
+        enemyHpBarCalc = 24.5 * enemyPercentHp; 
+        
+        if (this.enemy.hp <= 0) {
+            enemyHpBar.style.width = `1rem`;
+        } else {
+            enemyHpBar.style.width = `${24.5 - enemyHpBarCalc}rem`;
+        }
+
+        game.endGame();
+
+        fight.setAttribute("disabled", "disabled");
+        if(endGameCounter === 1) {
+            return;
+        } else {
+            setTimeout(function(){
+                enable();
+            }, 6000);
+        }
+        
+        return this.enemy.hp;
          
     }
 
     enemyAttack(){
-        this.player.hp = this.player.hp - this.enemy.dmg
-        console.log(this.player.hp)
-        return this.player.hp
+        this.player.hp = this.player.hp - this.enemy.dmg;
+        statusText.textContent = `${this.enemy.name} strikes back, dealing ${this.enemy.dmg} dmg to ${this.player.name}!`;
         
+        playerPercentHp = this.enemy.dmg / this.player.hp;
+        playerHpBar.textContent = `${this.player.hp}`;
+        playerHpBarCalc = 24.5 * playerPercentHp; 
+
+        if (this.player.hp <= 0) {
+            playerHpBar.style.width = `1rem`;
+        } else {
+            playerHpBar.style.width = `${24.5 - playerHpBarCalc}rem`;
+        }
+
+        game.endGame();
+
+        console.log(this.player.hp);
+        
+        return this.player.hp;
+        
+    }
+
+    endGame(){
+        
+        if(this.player.hp <= 0) {
+            endGameCounter = 1;
+            statusText.textContent = `${this.enemy.name} has slain ${this.player.name}!`;
+            setTimeout(function(){
+                reset();
+            }, 20000)
+        } 
+
+        if(this.enemy.hp <= 0) {
+            endGameCounter = 1;
+            statusText.textContent = `${this.player.name} has slain ${this.enemy.name}!`;
+            setTimeout(function(){
+                reset();
+            }, 20000)
+        }
+
     }
 
 
@@ -90,6 +156,11 @@ const Enemy = class {
 }  
 
 
+const enable = () => {
+    fight.removeAttribute("disabled");
+    statusText.textContent = `Waiting for attack...`
+}
+
 const changeView = (data) => {
     const source = document.getElementById(`in-game-view`).innerHTML;
     const template = Handlebars.compile(source);
@@ -97,6 +168,17 @@ const changeView = (data) => {
     const html = template(context);
     document.querySelector(`.section-1-container`).innerHTML = html;
     fightButton = document.querySelector('.fight-button');
+    fight = document.querySelector('.fight');
+    statusText = document.querySelector(`.status-text`);
+    playerHpBar = document.querySelector(`.player-hp-bar`);
+    enemyHpBar = document.querySelector(`.enemy-hp-bar`);
+}
+
+const reset = () => {
+        const source = document.getElementById(`original-template`).innerHTML;
+        const template = Handlebars.compile(source);
+        const html = template(``);
+        document.querySelector(`.section-1-container`).innerHTML = html;
 }
 
 fighter1.addEventListener("click", () => {
@@ -127,15 +209,20 @@ fighter3.addEventListener("click", () => {
 })
 
 const fightButtonFn = () => {
-    if (buttonClick === 0) {
+    if (endGameCounter === 1) {
         return;
     } else {
         fightButton.addEventListener('click',() => {
-            console.log(`i ran`);
-        game.playerAttack();
-            setTimeout(function(){
-                game.enemyAttack()
-            }, 2000)
+            game.playerAttack();
+            if(endGameCounter === 1) {
+                console.log(`end!`);
+                return;
+            } else {
+                setTimeout(function(){
+                game.enemyAttack();
+            }, 3000);
+            }
+            
         })
     }
 }

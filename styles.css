@@ -102,9 +102,81 @@ body {
   top: 3rem;
 }
 
-.fight {
-  width: 6 rem;
+.text-box-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(1, 1, 70);
+  margin: 2rem 0 0 0;
+  width: 40rem;
+  height: 10rem;
 }
+
+.status-text {
+  font-family: "Chivo";
+  font-size: 28px;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 2rem 0 2rem;
+  color: white;
+}
+
+.hp-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60rem;
+  height: 2rem;
+  margin-top: 8rem;
+}
+
+.hp-bar {
+  background-color: red;
+  width: 24.5rem;
+  height: 2rem;
+  text-align: end;
+  line-height: 2rem;
+  padding-right: 0.5rem;
+}
+
+.fight {
+  font-family: "Chivo";
+  margin: 3rem 0 0 0;
+  width: 9rem;
+  height: 3rem;
+  background-color: rgb(1, 1, 70);
+  color: white;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.116);
+  border-right: 1px solid rgba(0, 0, 0, 0.116);
+  border-left: none;
+  border-top: none;
+}
+
+.names-container {
+  display: flex;
+  width: 25rem;
+  height: auto;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.names {
+  font-family: "Chivo";
+  font-size: 18px;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 3rem;
+  background-color: rgba(0, 3, 43, 0.3);
+  height: 3rem;
+  width: 10rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.116);
+  border-right: 1px solid rgba(0, 0, 0, 0.116);
+}
+
+/* ////////////////SECTION 2 CONTAINER */
 
 .section-2-container {
   display: flex;
