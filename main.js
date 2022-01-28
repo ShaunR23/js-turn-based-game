@@ -5,6 +5,9 @@
 const fighter1 = document.querySelector(`.fighter-1`);
 const fighter2 = document.querySelector(`.fighter-2`);
 const fighter3 = document.querySelector(`.fighter-3`);
+const home = document.querySelector(`.section-1-container`);
+const inGame = document.querySelector(`.section-1-container-2`);
+
 let fight;
 let fightButton;
 let statusText;
@@ -17,6 +20,8 @@ let enemyHpBarCalc = 0;
 let playerHpBarCalc = 0;
 let playerPercentHp = 0;
 let endGameCounter = 0;
+
+inGame.hidden = true;
 
 const Game = class {
     constructor(player, enemy) {
@@ -89,7 +94,7 @@ const Game = class {
                 enable();
             }, 6000);
         }
-        
+
         return this.enemy.hp;
          
     }
@@ -162,11 +167,13 @@ const enable = () => {
 }
 
 const changeView = (data) => {
+    home.hidden = true;
+    inGame.hidden = false;
     const source = document.getElementById(`in-game-view`).innerHTML;
     const template = Handlebars.compile(source);
     const context = data;
     const html = template(context);
-    document.querySelector(`.section-1-container`).innerHTML = html;
+    document.querySelector(`.section-1-container-2`).innerHTML = html;
     fightButton = document.querySelector('.fight-button');
     fight = document.querySelector('.fight');
     statusText = document.querySelector(`.status-text`);
@@ -175,10 +182,17 @@ const changeView = (data) => {
 }
 
 const reset = () => {
-        const source = document.getElementById(`original-template`).innerHTML;
-        const template = Handlebars.compile(source);
-        const html = template(``);
-        document.querySelector(`.section-1-container`).innerHTML = html;
+
+        playerNum = 0;
+        enemyNum = 0;
+        buttonClick = 0;
+        enemyPercentHp = 0;
+        enemyHpBarCalc = 0;
+        playerHpBarCalc = 0;
+        playerPercentHp = 0;
+        endGameCounter = 0;
+
+        home.hidden = false;
 }
 
 fighter1.addEventListener("click", () => {
@@ -195,7 +209,7 @@ fighter1.addEventListener("click", () => {
 fighter2.addEventListener("click", () => {
     playerNum = 2;
     buttonClick += 1;
-    new Game();
+    game = new Game();
     changeView(game);
     fightButtonFn();
 })
@@ -203,7 +217,7 @@ fighter2.addEventListener("click", () => {
 fighter3.addEventListener("click", () => {
     playerNum = 3;
     buttonClick += 1;
-    new Game();
+    game = new Game();
     changeView(game);
     fightButtonFn();
 })
