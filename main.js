@@ -2,16 +2,10 @@
 
 ("use strict");
 
-
-const exampleButton = document.querySelector(`.example`);
-const exampleButton2 = document.querySelector(`.example2`);
-const exampleButton3 = document.querySelector(`.example3`);
-
 const fighter1 = document.querySelector(`.fighter-1`);
 const fighter2 = document.querySelector(`.fighter-2`);
 const fighter3 = document.querySelector(`.fighter-3`);
 const fight = document.querySelector ('.fight')
-
 let playerNum = 0;
 let enemyNum = 0;
 let game;
