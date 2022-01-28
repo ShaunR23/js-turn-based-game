@@ -3,8 +3,8 @@
 ("use strict");
 
 const exampleButton = document.querySelector(`.example`);
-const exampleButton = document.querySelector(`.example2`);
-const exampleButton = document.querySelector(`.example3`);
+const exampleButton2 = document.querySelector(`.example2`);
+const exampleButton3 = document.querySelector(`.example3`);
 let playerNum = 0;
 let enemyNum = 0;
 let game;
