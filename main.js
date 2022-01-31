@@ -39,10 +39,10 @@ const Game = class {
         
         switch (playerNum) {
             case 1:
-                this.player = new Player({name:`Warrior`, hp: 20, maxhp: 20, dmg: 5, crit: 10});
+                this.player = new Player({name:`Warrior`, hp: 20, maxhp: 20, dmg: 5, crit: 15});
                 break;
             case 2:
-                this.player = new Player({name:`Bastion`, hp: 30, maxhp: 30, dmg: 2, crit: 10});
+                this.player = new Player({name:`Bastion`, hp: 40, maxhp: 30, dmg: 2, crit: 5});
                 break;
             case 3:
                 this.player = new Player({name:`Rogue`, hp: 13, maxhp: 13, dmg: 6, crit: 35});
@@ -59,10 +59,10 @@ const Game = class {
 
         switch (enemyNum) {
             case 1:
-                this.enemy = new Enemy({name:`Dark Knight`, hp: 20, maxhp: 20, dmg: 5, crit: 10});
+                this.enemy = new Enemy({name:`Dark Knight`, hp: 20, maxhp: 20, dmg: 5, crit: 15});
                 break;
             case 2:
-                this.enemy = new Enemy({name: `Glutton`, hp: 30, maxhp: 30, dmg: 2, crit: 10});
+                this.enemy = new Enemy({name: `Glutton`, hp: 40, maxhp: 30, dmg: 2, crit: 5});
                 break;
             case 3:
                 this.enemy = new Enemy({name: `Nightstalker`, hp: 13, maxhp: 13, dmg: 6, crit: 35});
@@ -82,15 +82,26 @@ const Game = class {
             statusText.textContent = `${this.player.name} attacked, dealing ${this.player.dmg} dmg to ${this.enemy.name}!`;
         }
 
+        //hp bar math//
+
+        let enemyHpBarCurrent = enemyHpBar.getBoundingClientRect();
+
         let enemyPercentHpCalc = (this.player.dmg / this.enemy.maxhp);
-        enemyPercentHp += enemyPercentHpCalc
+        enemyPercentHp = enemyPercentHpCalc;
         enemyHpBar.textContent = `${this.enemy.hp}`;
-        enemyHpBarCalc = 24.5 * enemyPercentHp; 
-        
+        enemyHpBarCalc = enemyHpBarCurrent.width * enemyPercentHp; 
+
         if (this.enemy.hp <= 0) {
             enemyHpBar.style.width = `1rem`;
         } else {
-            enemyHpBar.style.width = `${24.5 - enemyHpBarCalc}rem`;
+            enemyHpBar.style.width = `${enemyHpBarCurrent.width - enemyHpBarCalc}px`;
+        }
+
+        //hp bar math//
+
+        if (playerCrit === true) {
+            this.player.dmg /= 2;
+            playerCrit = false;
         }
 
         game.endGame();
@@ -99,11 +110,6 @@ const Game = class {
 
         if(endGameCounter === 1) {
             return;
-        }
-        
-        if (playerCrit === true) {
-            this.player.dmg /= 2;
-            playerCrit = false;
         }
 
         return this.enemy.hp;
@@ -121,16 +127,28 @@ const Game = class {
         } else {
             statusText.textContent = `${this.enemy.name} strikes back, dealing ${this.enemy.dmg} dmg to ${this.player.name}!`;
         }
+
+        //hp bar math//
+
+        let playerHpBarCurrent = playerHpBar.getBoundingClientRect();
         
         let playerPercentHpCalc = (this.enemy.dmg / this.player.maxhp);
-        playerPercentHp += playerPercentHpCalc
+        playerPercentHp = playerPercentHpCalc
+        console.log(`playerPercentHp = ${playerPercentHp}`)
         playerHpBar.textContent = `${this.player.hp}`;
-        playerHpBarCalc = 24.5 * playerPercentHp; 
+        playerHpBarCalc = playerHpBarCurrent.width * playerPercentHp; 
 
         if (this.player.hp <= 0) {
             playerHpBar.style.width = `1rem`;
         } else {
-            playerHpBar.style.width = `${24.5 - playerHpBarCalc}rem`;
+            playerHpBar.style.width = `${playerHpBarCurrent.width - playerHpBarCalc}px`;
+        }
+
+        //hp bar math//
+
+        if (enemyCrit === true) {
+            this.enemy.dmg /= 2;
+            enemyCrit = false;
         }
 
         game.endGame();
@@ -142,11 +160,6 @@ const Game = class {
                 enable();
                 statusText.textContent = `Waiting for attack...`;
             }, 3000);
-        }
-        
-        if (enemyCrit === true) {
-            this.enemy.dmg /= 2;
-            enemyCrit = false;
         }
 
         return this.player.hp;
