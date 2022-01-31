@@ -20,6 +20,10 @@ let enemyHpBarCalc = 0;
 let playerHpBarCalc = 0;
 let playerPercentHp = 0;
 let endGameCounter = 0;
+let playerCritNum = 0;
+let enemyCritNum = 0;
+let playerCrit = false;
+let enemyCrit = false;
 
 inGame.hidden = true;
 
@@ -35,13 +39,13 @@ const Game = class {
         
         switch (playerNum) {
             case 1:
-                this.player = new Player({name:`Warrior`, hp: 20, maxhp: 20, dmg: 5});
+                this.player = new Player({name:`Warrior`, hp: 20, maxhp: 20, dmg: 5, crit: 10});
                 break;
             case 2:
-                this.player = new Player({name:`Bastion`, hp: 30, maxhp: 30, dmg: 2});
+                this.player = new Player({name:`Bastion`, hp: 30, maxhp: 30, dmg: 2, crit: 10});
                 break;
             case 3:
-                this.player = new Player({name:`Rogue`, hp: 13, maxhp: 13, dmg: 8});
+                this.player = new Player({name:`Rogue`, hp: 13, maxhp: 13, dmg: 6, crit: 35});
                 break;
         }
     }
@@ -50,28 +54,34 @@ const Game = class {
 
         const randomNumGen = (max=4, min=1) => {
             enemyNum = Math.floor(Math.random() * (max - min) + min);
-            console.log(enemyNum);
         }
         randomNumGen();
 
         switch (enemyNum) {
             case 1:
-                this.enemy = new Enemy({name:`Dark Knight`, hp: 20, maxhp: 20, dmg: 5});
+                this.enemy = new Enemy({name:`Dark Knight`, hp: 20, maxhp: 20, dmg: 5, crit: 10});
                 break;
             case 2:
-                this.enemy = new Enemy({name: `Glutton`, hp: 30, maxhp: 30, dmg: 2});
+                this.enemy = new Enemy({name: `Glutton`, hp: 30, maxhp: 30, dmg: 2, crit: 10});
                 break;
             case 3:
-                this.enemy = new Enemy({name: `Nightstalker`, hp: 13, maxhp: 13, dmg: 8});
+                this.enemy = new Enemy({name: `Nightstalker`, hp: 13, maxhp: 13, dmg: 6, crit: 35});
                 break;
         }
     }
 
     playerAttack(){
+
+        game.playerCritChance();
+
         this.enemy.hp = this.enemy.hp - this.player.dmg;
-        console.log(this.enemy.hp);
-        statusText.textContent = `${this.player.name} attacked, dealing ${this.player.dmg} dmg to ${this.enemy.name}!`;
-       
+
+        if(playerCrit === true) {
+            statusText.textContent = `${this.player.name} attacked, dealing ${this.player.dmg} dmg (CRIT!) to ${this.enemy.name}!`;
+        } else {
+            statusText.textContent = `${this.player.name} attacked, dealing ${this.player.dmg} dmg to ${this.enemy.name}!`;
+        }
+
         let enemyPercentHpCalc = (this.player.dmg / this.enemy.maxhp);
         enemyPercentHp += enemyPercentHpCalc
         enemyHpBar.textContent = `${this.enemy.hp}`;
@@ -90,14 +100,27 @@ const Game = class {
         if(endGameCounter === 1) {
             return;
         }
+        
+        if (playerCrit === true) {
+            this.player.dmg /= 2;
+            playerCrit = false;
+        }
 
         return this.enemy.hp;
          
     }
 
     enemyAttack(){
+
+        game.enemyCritChance();
+
         this.player.hp = this.player.hp - this.enemy.dmg;
-        statusText.textContent = `${this.enemy.name} strikes back, dealing ${this.enemy.dmg} dmg to ${this.player.name}!`;
+        
+        if(enemyCrit === true) {
+            statusText.textContent = `${this.enemy.name} strikes back, dealing ${this.enemy.dmg} dmg (CRIT!) to ${this.player.name}!`;
+        } else {
+            statusText.textContent = `${this.enemy.name} strikes back, dealing ${this.enemy.dmg} dmg to ${this.player.name}!`;
+        }
         
         let playerPercentHpCalc = (this.enemy.dmg / this.player.maxhp);
         playerPercentHp += playerPercentHpCalc
@@ -112,7 +135,6 @@ const Game = class {
 
         game.endGame();
 
-        console.log(this.player.hp);
         if(endGameCounter === 1) {
             return;
         } else {
@@ -122,6 +144,11 @@ const Game = class {
             }, 3000);
         }
         
+        if (enemyCrit === true) {
+            this.enemy.dmg /= 2;
+            enemyCrit = false;
+        }
+
         return this.player.hp;
         
     }
@@ -130,40 +157,80 @@ const Game = class {
         
         if(this.player.hp <= 0) {
             endGameCounter = 1;
-            statusText.textContent = `${this.enemy.name} has slain ${this.player.name}!`;
+            setTimeout(() => {
+                statusText.textContent = `${this.enemy.name} has slain ${this.player.name}!`;
+            }, 3000);
+            
             setTimeout(function(){
                 reset();
-            }, 10000)
+            }, 10000);
         } 
 
         if(this.enemy.hp <= 0) {
             endGameCounter = 1;
-            statusText.textContent = `${this.player.name} has slain ${this.enemy.name}!`;
+            setTimeout(() => {
+                statusText.textContent = `${this.player.name} has slain ${this.enemy.name}!`;
+            }, 3000);
+            
             setTimeout(function(){
                 reset();
-            }, 10000)
+            }, 10000);
         }
 
+    }
+
+    playerCritChance(){
+        const critNumGen = (max=101, min=1) => {
+            playerCritNum = Math.floor(Math.random() * (max - min) + min);
+        } 
+        critNumGen();
+
+        console.log(playerCritNum);
+
+        if (playerCritNum <= this.player.crit) {
+            playerCrit = true;
+            this.player.dmg *= 2;
+        } else {
+            return;
+        }
+    }
+
+    enemyCritChance(){
+        const critNumGen2 = (max=101, min=1) => {
+            enemyCritNum = Math.floor(Math.random() * (max - min) + min);
+        }
+        critNumGen2();
+
+        console.log(enemyCritNum);
+
+        if (enemyCritNum <= this.enemy.crit) {
+            enemyCrit = true;
+            this.enemy.dmg *= 2;
+        } else {
+            return;
+        }
     }
 
 
 }
 
 const Player = class {
-    constructor({name, hp, maxhp, dmg}) {
+    constructor({name, hp, maxhp, dmg, crit}) {
         this.name = name;
         this.hp = hp;
         this.maxhp = maxhp;
         this.dmg = dmg;
+        this.crit = crit
     }
 }  
 
 const Enemy = class {
-    constructor({name, hp, maxhp, dmg}) {
+    constructor({name, hp, maxhp, dmg, crit}) {
         this.name = name;
         this.hp = hp;
         this.maxhp = maxhp;
         this.dmg = dmg;
+        this.crit = crit
     }
 }  
 
@@ -189,23 +256,22 @@ const changeView = (data) => {
 
 const reset = () => {
 
-        playerNum = 0;
-        enemyNum = 0;
-        buttonClick = 0;
-        enemyPercentHp = 0;
-        enemyHpBarCalc = 0;
-        playerHpBarCalc = 0;
-        playerPercentHp = 0;
-        endGameCounter = 0;
+    playerNum = 0;
+    enemyNum = 0;
+    buttonClick = 0;
+    enemyPercentHp = 0;
+    enemyHpBarCalc = 0;
+    playerHpBarCalc = 0;
+    playerPercentHp = 0;
+    endGameCounter = 0;
 
-        inGame.hidden = true;
-        home.hidden = false;
+    inGame.hidden = true;
+    home.hidden = false;
 }
 
 fighter1.addEventListener("click", () => {
     playerNum = 1;
     buttonClick += 1;
-    console.log('you clicked a button!')
     game = new Game();
     console.log(game);
     
