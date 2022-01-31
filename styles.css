@@ -9,7 +9,7 @@ body {
 .nav-container {
   position: fixed;
   width: 100%;
-  z-index: 1
+  z-index: 1;
 }
 
 .navbar {
@@ -19,7 +19,6 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0;
-
 }
 
 .navbar .nav-text {
@@ -82,10 +81,12 @@ body {
   display: flex;
   flex-direction: column;
   background: rgb(242, 242, 242);
-  background: linear-gradient(90deg,
-      rgba(242, 242, 242, 1) 0%,
-      rgba(221, 221, 221, 1) 24%,
-      rgba(205, 205, 205, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(242, 242, 242, 1) 0%,
+    rgba(221, 221, 221, 1) 24%,
+    rgba(205, 205, 205, 1) 100%
+  );
   height: 100vh;
   width: 100%;
   justify-content: center;
@@ -153,6 +154,7 @@ body {
   text-align: end;
   line-height: 2rem;
   padding-right: 0.5rem;
+  transition: 0.3s;
 }
 
 .fight {
@@ -199,16 +201,8 @@ img {
   width: 200px;
   height: 200px;
   margin-right: 20px;
-  border: solid 2px #000E4E;
-
+  border: solid 2px #000e4e;
 }
-
-button {
- 
-
-
-}
-
 
 .btn-outline:hover {
   cursor: pointer;
@@ -219,9 +213,8 @@ button {
 .btn-outline {
   margin-right: 20px;
   border-color: rgb(0, 9, 83);
-  color:rgb(0, 9, 83);
+  color: rgb(0, 9, 83);
 }
-
 
 .dropdown-item:hover {
   background-color: rgb(0, 9, 83);

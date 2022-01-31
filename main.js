@@ -35,13 +35,13 @@ const Game = class {
         
         switch (playerNum) {
             case 1:
-                this.player = new Player({name:`Warrior`, hp: 20, dmg: 5});
+                this.player = new Player({name:`Warrior`, hp: 20, maxhp: 20, dmg: 5});
                 break;
             case 2:
-                this.player = new Player({name:`Bastion`, hp: 30, dmg: 2});
+                this.player = new Player({name:`Bastion`, hp: 30, maxhp: 30, dmg: 2});
                 break;
             case 3:
-                this.player = new Player({name:`Rogue`, hp: 13, dmg: 8});
+                this.player = new Player({name:`Rogue`, hp: 13, maxhp: 13, dmg: 8});
                 break;
         }
     }
@@ -56,13 +56,13 @@ const Game = class {
 
         switch (enemyNum) {
             case 1:
-                this.enemy = new Enemy({name:`Dark Knight`, hp: 20, dmg: 5});
+                this.enemy = new Enemy({name:`Dark Knight`, hp: 20, maxhp: 20, dmg: 5});
                 break;
             case 2:
-                this.enemy = new Enemy({name: `Glutton`, hp: 30, dmg: 2});
+                this.enemy = new Enemy({name: `Glutton`, hp: 30, maxhp: 30, dmg: 2});
                 break;
             case 3:
-                this.enemy = new Enemy({name: `Nightstalker`, hp: 13, dmg: 8});
+                this.enemy = new Enemy({name: `Nightstalker`, hp: 13, maxhp: 13, dmg: 8});
                 break;
         }
     }
@@ -72,9 +72,8 @@ const Game = class {
         console.log(this.enemy.hp);
         statusText.textContent = `${this.player.name} attacked, dealing ${this.player.dmg} dmg to ${this.enemy.name}!`;
        
-        enemyPercentHp = (this.player.dmg / this.enemy.hp);
-
-        console.log(this.enemy.hp);
+        let enemyPercentHpCalc = (this.player.dmg / this.enemy.maxhp);
+        enemyPercentHp += enemyPercentHpCalc
         enemyHpBar.textContent = `${this.enemy.hp}`;
         enemyHpBarCalc = 24.5 * enemyPercentHp; 
         
@@ -87,12 +86,9 @@ const Game = class {
         game.endGame();
 
         fight.setAttribute("disabled", "disabled");
+
         if(endGameCounter === 1) {
             return;
-        } else {
-            setTimeout(function(){
-                enable();
-            }, 6000);
         }
 
         return this.enemy.hp;
@@ -103,7 +99,8 @@ const Game = class {
         this.player.hp = this.player.hp - this.enemy.dmg;
         statusText.textContent = `${this.enemy.name} strikes back, dealing ${this.enemy.dmg} dmg to ${this.player.name}!`;
         
-        playerPercentHp = this.enemy.dmg / this.player.hp;
+        let playerPercentHpCalc = (this.enemy.dmg / this.player.maxhp);
+        playerPercentHp += playerPercentHpCalc
         playerHpBar.textContent = `${this.player.hp}`;
         playerHpBarCalc = 24.5 * playerPercentHp; 
 
@@ -116,6 +113,14 @@ const Game = class {
         game.endGame();
 
         console.log(this.player.hp);
+        if(endGameCounter === 1) {
+            return;
+        } else {
+            setTimeout(() => {
+                enable();
+                statusText.textContent = `Waiting for attack...`;
+            }, 3000);
+        }
         
         return this.player.hp;
         
@@ -128,7 +133,7 @@ const Game = class {
             statusText.textContent = `${this.enemy.name} has slain ${this.player.name}!`;
             setTimeout(function(){
                 reset();
-            }, 12000)
+            }, 10000)
         } 
 
         if(this.enemy.hp <= 0) {
@@ -136,7 +141,7 @@ const Game = class {
             statusText.textContent = `${this.player.name} has slain ${this.enemy.name}!`;
             setTimeout(function(){
                 reset();
-            }, 12000)
+            }, 10000)
         }
 
     }
@@ -145,17 +150,19 @@ const Game = class {
 }
 
 const Player = class {
-    constructor({name, hp, dmg}) {
+    constructor({name, hp, maxhp, dmg}) {
         this.name = name;
         this.hp = hp;
+        this.maxhp = maxhp;
         this.dmg = dmg;
     }
 }  
 
 const Enemy = class {
-    constructor({name, hp, dmg}) {
+    constructor({name, hp, maxhp, dmg}) {
         this.name = name;
         this.hp = hp;
+        this.maxhp = maxhp;
         this.dmg = dmg;
     }
 }  
@@ -163,7 +170,6 @@ const Enemy = class {
 
 const enable = () => {
     fight.removeAttribute("disabled");
-    statusText.textContent = `Waiting for attack...`
 }
 
 const changeView = (data) => {
