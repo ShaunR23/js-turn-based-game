@@ -7,7 +7,6 @@ body {
 }
 
 .nav-container {
-  position: fixed;
   width: 100%;
   z-index: 1;
 }
@@ -125,7 +124,7 @@ body {
   align-items: center;
   background-color: rgb(1, 1, 70);
   margin: 2rem 0 0 0;
-  width: 40rem;
+  width: 90vw;
   height: 10rem;
 }
 
@@ -142,12 +141,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60rem;
+  width: 100vw;
   height: 2rem;
   margin-top: 8rem;
+  
+  
+ 
 }
 
 .hp-bar {
+
   background-color: red;
   width: 24.5rem;
   height: 2rem;
@@ -155,6 +158,12 @@ body {
   line-height: 2rem;
   padding-right: 0.5rem;
   transition: 0.3s;
+  
+}
+
+.player-hp-bar {
+  /* margin-left: 1rem; */
+  margin-right: 0.5rem;
 }
 
 .fight {
