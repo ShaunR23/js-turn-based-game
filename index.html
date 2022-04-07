@@ -1,101 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-      integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="nav-container">
-      <nav class="navbar">
-        <div class="nav-text">
-          <h1>Turn Based Game!!</h1>
-        </div>
-        <div class="nav-list">
-          <ul>
-            <li><a href="#section-1-container">Game</a></li>
-            <li><a href="#section-2-container">About Our Game</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    <div class="section-1-container" id="section-1-container">
-      <div class="img-container">
-        <img
-          class="homepage-img"
-          src="https://www.clipartmax.com/png/middle/158-1589909_fighter-hd-by-wahaadnan-final-fantasy-1-warrior.png"
-        />
 
-        <img
-          class="homepage-img"
-          src="https://res.cloudinary.com/teepublic/image/private/s--4L7CZtns--/c_fit,g_north_west,h_840,w_840/co_000000,e_outline:40/co_000000,e_outline:inner_fill:1/co_ffffff,e_outline:40/co_ffffff,e_outline:inner_fill:1/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1603791946/production/designs/15468819_0.jpg"
-        />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+    integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-        <img
-          class="homepage-img"
-          src="https://banner2.cleanpng.com/20180618/ovs/kisspng-perler-beads-pixel-art-dragon-5b2836951d3d79.8771973415293620691198.jpg"
-        />
+<body>
+  <div class="nav-container">
+    <nav class="navbar">
+      <div class="nav-text">
+        <h1>Turn Based Game!!</h1>
       </div>
-
-      <div class="fight-button-container"></div>
-      <div class="dropdown fighter-select">
-        <button
-          class="btn btn-outline hover-overlay hover-zoom ripple dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Select Your Fighter!
-        </button>
-
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li>
-            <a class="dropdown-item fighter-1" id="fighter-1" href="#"
-              >Warrior</a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item fighter-2" id="fighter-2" href="#"
-              >Bastion</a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item fighter-3" id="fighter-3" href="#">Rogue</a>
-          </li>
+      <div class="nav-list">
+        <ul>
+          <li><a href="#section-1-container">Game</a></li>
+          <li><a href="#section-2-container">About Our Game</a></li>
         </ul>
       </div>
-    </div>
-    <div class="section-1-container-2"></div>
-    <div class="section-2-container" id="section-2-container">
-      <h1>About Our Game</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quod, quia
-        natus et perferendis quos voluptatibus nam incidunt, possimus pariatur,
-        alias cupiditate? Doloribus minus maiores totam ex distinctio esse
-        necessitatibus?
-      </p>
+    </nav>
+  </div>
+  <div class="section-1-container" id="section-1-container">
+    <div class="img-container">
+      <img class="homepage-img"
+        src="https://www.clipartmax.com/png/middle/158-1589909_fighter-hd-by-wahaadnan-final-fantasy-1-warrior.png" />
+
+      <img class="homepage-img"
+        src="https://res.cloudinary.com/teepublic/image/private/s--4L7CZtns--/c_fit,g_north_west,h_840,w_840/co_000000,e_outline:40/co_000000,e_outline:inner_fill:1/co_ffffff,e_outline:40/co_ffffff,e_outline:inner_fill:1/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1603791946/production/designs/15468819_0.jpg" />
+
+      <img class="homepage-img"
+        src="https://banner2.cleanpng.com/20180618/ovs/kisspng-perler-beads-pixel-art-dragon-5b2836951d3d79.8771973415293620691198.jpg" />
     </div>
 
-    <script id="in-game-view" type="text/x-handbars-template">
+    <div class="fight-button-container"></div>
+    <div class="dropdown fighter-select">
+      <button class="btn btn-outline hover-overlay hover-zoom ripple dropdown-toggle" type="button"
+        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Select Your Fighter!
+      </button>
+
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li>
+          <a class="dropdown-item fighter-1" id="fighter-1" href="#">Warrior</a>
+        </li>
+        <li>
+          <a class="dropdown-item fighter-2" id="fighter-2" href="#">Bastion</a>
+        </li>
+        <li>
+          <a class="dropdown-item fighter-3" id="fighter-3" href="#">Rogue</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="section-1-container-2"></div>
+  <div class="section-2-container" id="section-2-container">
+    <h1>About Our Game</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quod, quia
+      natus et perferendis quos voluptatibus nam incidunt, possimus pariatur,
+      alias cupiditate? Doloribus minus maiores totam ex distinctio esse
+      necessitatibus?
+    </p>
+  </div>
+
+  <script id="in-game-view" type="text/x-handbars-template">
         <div class="text-box-container">
             <p class="status-text">{{this.player.name}} has started a fight with {{this.enemy.name}}!</p>
         </div>
@@ -113,11 +90,10 @@
         <div class="fight-button"><button class="fight">fight</button></div>
     </script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
-    <script src="main.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+
 </html>

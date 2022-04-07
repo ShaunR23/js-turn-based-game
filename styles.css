@@ -144,13 +144,9 @@ body {
   width: 100vw;
   height: 2rem;
   margin-top: 8rem;
-  
-  
- 
 }
 
 .hp-bar {
-
   background-color: red;
   width: 24.5rem;
   height: 2rem;
@@ -158,7 +154,6 @@ body {
   line-height: 2rem;
   padding-right: 0.5rem;
   transition: 0.3s;
-  
 }
 
 .player-hp-bar {
